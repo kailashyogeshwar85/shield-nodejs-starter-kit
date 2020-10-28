@@ -1,0 +1,26 @@
+{
+  "name": "shield-nodejs-starter-kit",
+  "version": "0.0.1",
+  "description": "Shield Starter Kit for NodeJS Express Application.",
+  "main": "dist/server.js",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "NODE_ENV=test npm test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kailashyogeshwar85/shield-nodejs-starter-kit.git"
+  },
+  "keywords": [
+    "shield",
+    "nodejs-starter-kit"
+  ],
+  "author": "kailash.yogeshwar <kailashyogeshwar85@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/kailashyogeshwar85/shield-nodejs-starter-kit/issues"
+  },
+  "homepage": "https://github.com/kailashyogeshwar85/shield-nodejs-starter-kit#readme"
+}
