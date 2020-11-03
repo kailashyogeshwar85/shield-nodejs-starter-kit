@@ -11,6 +11,8 @@ import DIUtil from '../utils/di.utils';
 import DatabaseFactory from './database';
 import QueueFactory from './queue';
 import JobFactory from './jobs';
+import StreamFactory from './stream';
+
 /**
  * @description Loaders will load all the modules and hook up the dependencies.
  */
@@ -33,7 +35,7 @@ const loader = async ({ app }: IExpressApp): Promise<void> => {
   await JobFactory(queueService);
 
   // load stream
-
+  await StreamFactory();
 
   await DI({ app });
 };

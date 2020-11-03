@@ -36,6 +36,12 @@ export default class Config {
   };
 
   static readonly STREAM_CONFIG = {
-    brokers: ['localhost:9093', 'localhost:9093', 'localhost:9094'],
+    brokers: process.env.KAFKA_BROKERS,
+    ssl: true,
+    sasl: {
+      mechanism: 'scram-sha-256',
+      username: process.env.KAFKA_SASL_USERNAME,
+      password: process.env.KAFKA_SASL_PASSWORD,
+    },
   };
 }

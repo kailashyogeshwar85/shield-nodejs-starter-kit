@@ -1,8 +1,19 @@
-import { KafkaConfig, ProducerRecord } from 'kafkajs';
+import { ProducerRecord } from 'kafkajs';
+
+export interface IKafkaConnectOpts {
+  brokers: string;
+  ssl?: boolean;
+  sasl?: {
+    mechanism: string;
+    username: string;
+    password: string;
+  };
+}
 
 export interface IStreamOptions {
   type: string;
-  connectOpts: KafkaConfig;
+  // eslint-disable-next-line no-undef
+  connectOpts: StreamConnectOpts;
 }
 
 export interface IStreamProvider {
