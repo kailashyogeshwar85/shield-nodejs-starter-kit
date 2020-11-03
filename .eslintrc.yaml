@@ -1,0 +1,29 @@
+---
+root: true
+parser: "@typescript-eslint/parser"
+env:
+  node: true
+  es6: true
+parserOptions:
+  ecmaVersion: 2015 #Allowing for the modern ECMAScript Feature
+  sourceType: module #Allows for the use of imports
+extends:
+  - "plugin:@typescript-eslint/recommended"
+  - "prettier/@typescript-eslint" # Uses eslint-config-prettier to disable ESLint rules from @typescript-eslint/eslint-plugin that would conflict with prettier
+  - "airbnb"
+  - "plugin:import/typescript"
+  - "plugin:prettier/recommended" #Enables eslint-plugin-prettier and eslint-config-prettier
+rules:
+  prettier/prettier:
+    - error
+    -
+      trailingComma: all
+      bracketSpacing: true
+
+  ### Different from airbnb config
+
+  ### Styling ###
+  # Prefer new line before return
+  newline-before-return: error
+
+  import/extensions: 0

@@ -1,12 +1,18 @@
 {
   "compilerOptions": {
+    "baseUrl": "src",
     "allowJs": true,
     "checkJs": true,
     "outDir": "./dist",
     "module": "commonjs",
     "target": "es2015",
     "moduleResolution": "node",
-    "experimentalDecorators": true
+    "experimentalDecorators": true,
+    "esModuleInterop": true,
+    "typeRoots": [
+      "src/types",
+      "./node_modules/@types",
+    ]
   },
   "include": [
     "./src/**/*"
