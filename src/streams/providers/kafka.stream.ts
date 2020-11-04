@@ -6,6 +6,7 @@ import {
   Consumer,
   ProducerRecord,
   EachMessagePayload,
+  logLevel,
 } from 'kafkajs';
 import _ from 'lodash';
 import LoggerFactory from '../../factory/services/logger.factory';
@@ -87,6 +88,7 @@ class KafkaStreamProvider implements IStreamProvider {
   private getConnectOpts(opts: IKafkaConnectOpts): KafkaConfig {
     const connectOpts: KafkaConfig = {
       brokers: _.split(opts.brokers, ','),
+      logLevel: logLevel.ERROR,
     };
 
     return _.merge(opts, connectOpts);

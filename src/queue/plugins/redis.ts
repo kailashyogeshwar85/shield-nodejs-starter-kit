@@ -20,9 +20,9 @@ class RedisQueueService implements IQueue<RedisQueueService> {
 
   private app: Application;
 
-  private queue: BullQueue;
-
   private logger: Logger;
+
+  private queueList: Map<string, BullQueue>;
 
   constructor({ app }: IExpressApp, logger: LoggerFactory) {
     this.queueOptions = {
@@ -35,6 +35,7 @@ class RedisQueueService implements IQueue<RedisQueueService> {
     };
     this.logger = logger.createLogger('queue');
     this.app = app;
+    this.queueList = new Map();
   }
 
   /**
@@ -44,16 +45,19 @@ class RedisQueueService implements IQueue<RedisQueueService> {
    * @memberof RedisQueueService
    */
   async configure(queueName: string): Promise<RedisQueueService> {
-    return new Promise((resolve, reject) => {
-      this.queue = new Queue(queueName, this.queueOptions);
+    this.logger.debug(`Configuring JobQueue for ${queueName}`);
 
-      this.queue.client.on('connect', () => {
-        this.logger.info(`${queueName} is connected`);
+    return new Promise((resolve, reject) => {
+      const queue = new Queue(queueName, this.queueOptions);
+      this.queueList.set(queueName, queue);
+
+      queue.client.on('connect', () => {
+        this.logger.info(`${queue.name} is connected ${queue.name}`);
         resolve(this);
       });
 
-      this.queue.client.on('error', err => {
-        this.logger.error('Failed to initialize queue');
+      queue.client.on('error', err => {
+        this.logger.error(`Failed to initialize queue ${queue.name}`);
         this.app.emit('error', err);
         reject(err);
       });
@@ -62,17 +66,51 @@ class RedisQueueService implements IQueue<RedisQueueService> {
 
   /**
    * @description Registers a Job Processor
+   * @param {string} queueName QueueName of a job eg: imageConverter
+   * @param {string} jobCategory Category of a job eg: pngConverter
    * @param {JobProcessor} processor
    * @memberof RedisQueueService
    */
   // eslint-disable-next-line no-undef
-  registerProcessor(processor: JobProcessor): void {
-    this.queue.process(processor);
+  public registerProcessor(
+    queueName: string,
+    // eslint-disable-next-line no-undef
+    processor: JobProcessor,
+    jobCategory?: string,
+  ): void {
+    if (!this.queueList.has(queueName)) {
+      throw new Error(`No Queue is configured with type ${jobCategory}`);
+    }
+    if (jobCategory) {
+      this.queueList.get(queueName).process(processor);
+    }
+    this.queueList.get(queueName).process(jobCategory, processor);
   }
 
-  // TODO: Add additional methods like purge
-  purge(): void {
-    this.queue.clean(1000);
+  /**
+   * @description Adds job to the current queue.
+   * @param {string} queueName QueueName of a job eg: imageConverter
+   * @param {string} jobCategory Category of a job eg: userRegistered
+   * @param {unknown} jobData
+   * @memberof RedisQueueService
+   */
+  public addJob(
+    queueName: string,
+    jobData: unknown,
+    jobCategory?: string,
+  ): Promise<Queue.Job<any>> {
+    if (!this.queueList.has(queueName)) {
+      throw new Error(`No Queue is configured with type ${jobCategory}`);
+    }
+    if (jobCategory) {
+      return this.queueList.get(queueName).add(jobData);
+    }
+
+    return this.queueList.get(queueName).add(jobCategory, jobData);
+  }
+
+  public purge(queueName: string, gracePeriod: number): void {
+    this.queueList.get(queueName).clean(gracePeriod);
   }
 }
 

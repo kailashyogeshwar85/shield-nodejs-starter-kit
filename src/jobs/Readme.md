@@ -6,4 +6,6 @@ Job should be used for creating background job that will be processed by externa
 
 
 ### API:
-    - create(jobData): Promise<any>
+    - create(jobCategory: string, jobData: any): Promise<any>
+
+NOTE: Processors should not be part of the same Service creating Jobs. Keep them separate for better scaling.
