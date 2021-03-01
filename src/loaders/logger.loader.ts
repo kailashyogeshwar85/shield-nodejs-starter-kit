@@ -1,7 +1,7 @@
 import { ILogOptions, Logger } from '@zebpay/colt';
 import { AwilixContainer, asClass } from 'awilix';
 import Config from '../constants/config.constant';
-import LoggerFactory from '../factory/services/logger.factory';
+import LoggerFactory from '../factory/services/logger.service.factory';
 import DIHelper from '../utils/di.utils';
 
 const getLogger = (scope: string): Logger => {

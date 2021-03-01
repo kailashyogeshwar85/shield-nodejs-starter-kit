@@ -1,5 +1,5 @@
 import { Logger } from '@zebpay/colt';
-import LoggerFactory from '../factory/services/logger.factory';
+import LoggerFactory from '../factory/services/logger.service.factory';
 import { IMessagingOptions } from '../interfaces/IMessaging.interface';
 import KafkaStreamProvider from './providers/kafka.messaging';
 

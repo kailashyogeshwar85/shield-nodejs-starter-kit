@@ -1,5 +1,5 @@
 import { asValue } from 'awilix';
-import LoggerFactory from '../factory/services/logger.factory';
+import LoggerFactory from '../factory/services/logger.service.factory';
 import { IMessagingOptions } from '../interfaces/IMessaging.interface';
 import Stream from '../messaging';
 import Config from '../constants/config.constant';

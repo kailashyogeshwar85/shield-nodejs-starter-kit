@@ -2,7 +2,7 @@ import IQueue from '../interfaces/IQueue.interface';
 import IExpressApp from '../interfaces/IExpressApp.interface';
 import Config from '../constants/config.constant';
 import RedisQueueService from './plugins/redis.queue';
-import LoggerFactory from '../factory/services/logger.factory';
+import LoggerFactory from '../factory/services/logger.service.factory';
 
 /**
  * @description Configures the Queue Adapter eg: Redis, SQS

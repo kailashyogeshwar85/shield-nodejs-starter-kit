@@ -3,7 +3,7 @@ import { Logger } from '@zebpay/colt';
 import Queue from 'bull';
 import IJobCreator from '../interfaces/IJobCreator.interface';
 import IQueue, { IJobProcessor } from '../interfaces/IQueue.interface';
-import LoggerFactory from '../factory/services/logger.factory';
+import LoggerFactory from '../factory/services/logger.service.factory';
 
 /**
  * @description Creates the new registered Email job.

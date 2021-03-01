@@ -8,7 +8,7 @@ import { Logger } from '@zebpay/colt';
 import Config from '../../constants/config.constant';
 import IExpressApp from '../../interfaces/IExpressApp.interface';
 import IQueue from '../../interfaces/IQueue.interface';
-import LoggerFactory from '../../factory/services/logger.factory';
+import LoggerFactory from '../../factory/services/logger.service.factory';
 
 /**
  * @description Creates a bull service

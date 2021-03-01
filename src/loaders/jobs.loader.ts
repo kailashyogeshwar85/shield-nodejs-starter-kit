@@ -1,5 +1,5 @@
 import { asClass, AwilixContainer } from 'awilix';
-import LoggerFactory from '../factory/services/logger.factory';
+import LoggerFactory from '../factory/services/logger.service.factory';
 import IQueue from '../interfaces/IQueue.interface';
 import UserRegisterEmailJob from '../jobs/userRegisterEmail.job';
 import DIHelper from '../utils/di.utils';

@@ -1,6 +1,6 @@
 import IExpressApp from '../interfaces/IExpressApp.interface';
 import DIHelper from '../utils/di.utils';
-import LoggerFactory from '../factory/services/logger.factory';
+import LoggerFactory from '../factory/services/logger.service.factory';
 import AppRouter from '../api/routes';
 
 /**

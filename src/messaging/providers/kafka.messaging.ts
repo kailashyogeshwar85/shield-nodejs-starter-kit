@@ -9,7 +9,7 @@ import {
   logLevel,
 } from 'kafkajs';
 import _ from 'lodash';
-import LoggerFactory from '../../factory/services/logger.factory';
+import LoggerFactory from '../../factory/services/logger.service.factory';
 import {
   IKafkaConnectOpts,
   IMessagingOptions,

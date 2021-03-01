@@ -3,45 +3,36 @@ import { Application, Router, Request, Response } from 'express';
 import LoggerFactory from '../../factory/services/logger.service.factory';
 import DIHelper from '../../utils/di.utils';
 
-const UserRouter = (app: Application): void => {
+const TodoRouter = (app: Application): void => {
   const container: AwilixContainer = DIHelper.getContainer();
   const logger = container
     .resolve<LoggerFactory>('logger')
     .createLogger('router');
-  logger.debug('Configuring user router');
+  logger.debug('Configuring todo router');
 
   const router = Router();
   app.use(router);
-
   /**
    *
-   * @api {GET} /users Get Users
-   * @apiName Get Users List
-   * @apiGroup User
+   * @api {GET} /todos Get TODOS
+   * @apiName TODOS
+   * @apiGroup TODO
    * @apiVersion  0.0.1
    *
    *
-   * @apiParam  {String} paramName description
-   *
-   * @apiSuccess (200) {type} name description
-   *
-   * @apiParamExample  {type} Request-Example:
-   * {
-   *     property : value
-   * }
-   *
+   * @apiSuccess (200) {JSON} name description
    *
    * @apiSuccessExample {type} Success-Response:
    * {
-   *     "status" : "success",
+   *     "status": "success",
    *     "data": [],
-   *      error: null
+   *     "error": null
    * }
    *
    */
-  router.get('/users', (req: Request, res: Response) => {
-    res.send('USER ENDPOINT');
+  router.get('/todos', (req: Request, res: Response) => {
+    res.send('TODO LIST');
   });
 };
 
-export default UserRouter;
+export default TodoRouter;

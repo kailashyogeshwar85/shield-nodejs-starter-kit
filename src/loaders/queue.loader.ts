@@ -2,7 +2,7 @@ import { asValue } from 'awilix';
 import IQueue from '../interfaces/IQueue.interface';
 import IExpressApp from '../interfaces/IExpressApp.interface';
 import DIHelper from '../utils/di.utils';
-import LoggerFactory from '../factory/services/logger.factory';
+import LoggerFactory from '../factory/services/logger.service.factory';
 import QueueFactory from '../queue';
 /**
  * @description Loads Queue Service
