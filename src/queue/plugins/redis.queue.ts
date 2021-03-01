@@ -5,9 +5,9 @@
 import { Application } from 'express';
 import Queue, { Queue as BullQueue } from 'bull';
 import { Logger } from '@zebpay/colt';
-import Config from '../../config';
-import IExpressApp from '../../interfaces/IExpressApp';
-import IQueue from '../../interfaces/IQueue';
+import Config from '../../constants/config.constant';
+import IExpressApp from '../../interfaces/IExpressApp.interface';
+import IQueue from '../../interfaces/IQueue.interface';
 import LoggerFactory from '../../factory/services/logger.factory';
 
 /**

@@ -1,7 +1,7 @@
-import IQueue from '../interfaces/IQueue';
-import IExpressApp from '../interfaces/IExpressApp';
-import Config from '../config';
-import RedisQueueService from './plugins/redis';
+import IQueue from '../interfaces/IQueue.interface';
+import IExpressApp from '../interfaces/IExpressApp.interface';
+import Config from '../constants/config.constant';
+import RedisQueueService from './plugins/redis.queue';
 import LoggerFactory from '../factory/services/logger.factory';
 
 /**

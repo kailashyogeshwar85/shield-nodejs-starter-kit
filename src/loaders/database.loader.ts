@@ -1,7 +1,7 @@
 import { Sequelize, SequelizeOptions } from 'sequelize-typescript';
-import Config from '../config';
-import getLogger from './logger';
-import IExpressApp from '../interfaces/IExpressApp';
+import Config from '../constants/config.constant';
+import getLogger from './logger.loader';
+import IExpressApp from '../interfaces/IExpressApp.interface';
 
 /**
  * @description Connects to database.

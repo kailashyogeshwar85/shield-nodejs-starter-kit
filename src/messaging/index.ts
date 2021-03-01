@@ -1,14 +1,14 @@
 import { Logger } from '@zebpay/colt';
 import LoggerFactory from '../factory/services/logger.factory';
-import { IStreamOptions } from '../interfaces/IStream';
-import KafkaStreamProvider from './providers/kafka.stream';
+import { IMessagingOptions } from '../interfaces/IMessaging.interface';
+import KafkaStreamProvider from './providers/kafka.messaging';
 
 /**
  * @description Stream Class create Pubsub Provider
  * @class Stream
  */
 class Stream {
-  private streamOptions: IStreamOptions;
+  private messagingOptions: IMessagingOptions;
 
   private logger: Logger;
 
@@ -16,12 +16,12 @@ class Stream {
 
   /**
    * Creates an instance of Stream.
-   * @param {IStreamOptions} options
+   * @param {IMessagingOptions} options
    * @param {LoggerFactory} loggerService
    * @memberof Stream
    */
-  constructor(options: IStreamOptions, loggerService: LoggerFactory) {
-    this.streamOptions = options;
+  constructor(options: IMessagingOptions, loggerService: LoggerFactory) {
+    this.messagingOptions = options;
     this.loggerService = loggerService;
     this.logger = loggerService.createLogger('stream');
   }
@@ -32,17 +32,17 @@ class Stream {
    * @return {*}  {StreamProvider}
    * @memberof Stream
    */
-  init(): StreamProvider {
-    let provider: StreamProvider;
-    const opts: IStreamOptions = this.streamOptions;
+  init(): MessagingProvider {
+    let provider: MessagingProvider;
+    const opts: IMessagingOptions = this.messagingOptions;
     this.logger.debug(`Configuring Stream TYPE:: ${opts.type}`);
-    switch (this.streamOptions.type) {
+    switch (this.messagingOptions.type) {
       case 'kafka':
         provider = new KafkaStreamProvider(opts, this.loggerService);
         break;
       default:
         throw new Error(
-          `Stream provider ${this.streamOptions.type} not supported`,
+          `Messaging provider ${this.messagingOptions.type} not supported`,
         );
     }
 

@@ -1,9 +1,9 @@
 import { Logger } from '@zebpay/colt';
 import express, { Application } from 'express';
 import { Server } from 'http';
-import Config from './config';
-import IShieldApplication from './interfaces/IShieldApplication';
-import LoggerFactory from './loaders/logger';
+import Config from './constants/config.constant';
+import IShieldApplication from './interfaces/IShieldApplication.interface';
+import LoggerFactory from './loaders/logger.loader';
 import AppLoader from './loaders';
 /**
  * @description Main Application class
@@ -39,7 +39,7 @@ export default class ShieldApplication implements IShieldApplication {
     this.server = this.app.listen(this.port || Config.PORT, () => {
       // log server started listening on port this.port | 3210
       this.logger.info(
-        `Server listening on PORT: ${Config.PORT} Environment: ${Config.ENVIRONMENT}`
+        `Server listening on PORT: ${Config.PORT} Environment: ${Config.ENVIRONMENT}`,
       );
       this.app.emit('listening');
     });

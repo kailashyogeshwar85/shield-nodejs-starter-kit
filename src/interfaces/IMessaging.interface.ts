@@ -10,13 +10,13 @@ export interface IKafkaConnectOpts {
   };
 }
 
-export interface IStreamOptions {
+export interface IMessagingOptions {
   type: string;
   // eslint-disable-next-line no-undef
-  connectOpts: StreamConnectOpts;
+  connectOpts: MessagingConnectOpts;
 }
 
-export interface IStreamProvider {
+export interface IMessagingProvider {
   createClient: (consumerGroupId: string) => void;
   // eslint-disable-next-line no-undef
   subscribe: (topic: string, handler: MessageHandler) => Promise<void>;

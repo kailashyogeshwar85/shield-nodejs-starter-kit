@@ -1,14 +1,14 @@
 import { asValue } from 'awilix';
 import LoggerFactory from '../factory/services/logger.factory';
-import { IStreamOptions } from '../interfaces/IStream';
-import Stream from '../streams';
-import Config from '../config';
+import { IMessagingOptions } from '../interfaces/IMessaging.interface';
+import Stream from '../messaging';
+import Config from '../constants/config.constant';
 import DIHelper from '../utils/di.utils';
 
 /**
  * @description Exports Stream Provider
  */
-const streamFactory = async (): Promise<void> => {
+const messagingFactory = async (): Promise<void> => {
   const container = DIHelper.getContainer();
 
   const loggerService = container.resolve<LoggerFactory>('logger');
@@ -17,17 +17,17 @@ const streamFactory = async (): Promise<void> => {
 
   logger.info('Configuring stream provider');
 
-  const options: IStreamOptions = {
+  const options: IMessagingOptions = {
     type: Config.STREAM_ADAPTER,
     connectOpts: Config.STREAM_CONFIG,
   };
 
-  const streamProvider = new Stream(options, loggerService).init();
-  await streamProvider.createClient('some_group_id');
+  const messagingProvider = new Stream(options, loggerService).init();
+  await messagingProvider.createClient('some_group_id');
 
   container.register({
-    streamProvider: asValue(streamProvider),
+    messagingProvider: asValue(messagingProvider),
   });
 };
 
-export default streamFactory;
+export default messagingFactory;

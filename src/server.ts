@@ -1,6 +1,6 @@
 import ShieldApplication from './app';
-import IShieldApplication from './interfaces/IShieldApplication';
-import LoggerFactory from './loaders/logger';
+import IShieldApplication from './interfaces/IShieldApplication.interface';
+import LoggerFactory from './loaders/logger.loader';
 
 /**
  * @description Boot your Express App and return the Http Server instance
@@ -14,7 +14,7 @@ const bootServer = (port?: number): Promise<IShieldApplication> => {
   return app.start();
 };
 
-if (process.env.NODE_ENV !== 'test') {
+if (require.main === module) {
   bootServer();
 }
 

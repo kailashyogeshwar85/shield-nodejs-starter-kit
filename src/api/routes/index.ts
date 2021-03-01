@@ -1,4 +1,4 @@
-import IExpressApp from '../../interfaces/IExpressApp';
+import IExpressApp from '../../interfaces/IExpressApp.interface';
 
 /**
  * @description Configures Routes

@@ -2,6 +2,11 @@ import dotenv from 'dotenv';
 
 dotenv.config();
 
+/**
+ * @description Config constants for application
+ * @export
+ * @class Config
+ */
 export default class Config {
   static readonly PORT = process.env.PORT || 3210;
 
@@ -17,7 +22,7 @@ export default class Config {
 
   static readonly LOG_OPTIONS = {
     logPath: process.env.LOG_PATH || 'logs',
-    logFile: process.env.LOGFILE || 'shield',
+    logFile: process.env.LOG_FILE || 'shield.log',
     level: process.env.LOG_LEVEL || 'debug',
   };
 

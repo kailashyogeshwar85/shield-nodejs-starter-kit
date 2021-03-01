@@ -12,11 +12,11 @@ import _ from 'lodash';
 import LoggerFactory from '../../factory/services/logger.factory';
 import {
   IKafkaConnectOpts,
-  IStreamOptions,
-  IStreamProvider,
-} from '../../interfaces/IStream';
+  IMessagingOptions,
+  IMessagingProvider,
+} from '../../interfaces/IMessaging.interface';
 
-class KafkaStreamProvider implements IStreamProvider {
+class KafkaStreamProvider implements IMessagingProvider {
   private clientOpts: KafkaConfig;
 
   private client: Kafka;
@@ -30,7 +30,7 @@ class KafkaStreamProvider implements IStreamProvider {
   // eslint-disable-next-line no-undef
   private messageHandlers: Map<string, MessageHandler>;
 
-  constructor(opts: IStreamOptions, loggerService: LoggerFactory) {
+  constructor(opts: IMessagingOptions, loggerService: LoggerFactory) {
     this.clientOpts = this.getConnectOpts(opts.connectOpts);
     this.logger = loggerService.createLogger('kafka');
   }

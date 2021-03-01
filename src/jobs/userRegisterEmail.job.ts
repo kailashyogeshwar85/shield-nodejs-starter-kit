@@ -1,8 +1,8 @@
 /* eslint-disable no-undef */
 import { Logger } from '@zebpay/colt';
 import Queue from 'bull';
-import IJobCreator from '../interfaces/IJobCreator';
-import IQueue, { IJobProcessor } from '../interfaces/IQueue';
+import IJobCreator from '../interfaces/IJobCreator.interface';
+import IQueue, { IJobProcessor } from '../interfaces/IQueue.interface';
 import LoggerFactory from '../factory/services/logger.factory';
 
 /**

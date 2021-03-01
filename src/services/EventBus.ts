@@ -1,4 +1,4 @@
-import { IEventBus } from '../interfaces/IEventBus';
+import { IEventBus } from '../interfaces/IEventBus.interface';
 
 /**
  * @description EventBus will allow to publish/subscribe events at the application level.
@@ -17,8 +17,15 @@ class EventBus implements IEventBus {
     this.subscribers = new Map();
   }
 
-  publish(msg: unknown) {}
+  // TODO:
+  publish(msg: unknown): void {}
 
+  /**
+   * @description Registers a Handler for EventType 1:1 support.
+   * @param {string} eventType
+   * @param {SubscribeHandler} handler
+   * @memberof EventBus
+   */
   // eslint-disable-next-line no-undef
   subscribe(eventType: string, handler: SubscribeHandler): void {
     if (!this.subscribers.has(eventType)) {
@@ -26,7 +33,6 @@ class EventBus implements IEventBus {
         eventType,
         new Map().set(Symbol(eventType), handler),
       );
-    } else {
     }
   }
 }
