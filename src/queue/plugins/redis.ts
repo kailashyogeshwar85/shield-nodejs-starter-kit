@@ -22,8 +22,20 @@ class RedisQueueService implements IQueue<RedisQueueService> {
 
   private logger: Logger;
 
+  /**
+   * @description Map of Queues associated with their name
+   * @private
+   * @type {Map<string, BullQueue>}
+   * @memberof RedisQueueService
+   */
   private queueList: Map<string, BullQueue>;
 
+  /**
+   * Creates an instance of RedisQueueService.
+   * @param {IExpressApp} { app }
+   * @param {LoggerFactory} logger
+   * @memberof RedisQueueService
+   */
   constructor({ app }: IExpressApp, logger: LoggerFactory) {
     this.queueOptions = {
       redis: {
@@ -48,6 +60,9 @@ class RedisQueueService implements IQueue<RedisQueueService> {
     this.logger.debug(`Configuring JobQueue for ${queueName}`);
 
     return new Promise((resolve, reject) => {
+      if (this.queueList.has(queueName)) {
+        return resolve(this);
+      }
       const queue = new Queue(queueName, this.queueOptions);
       this.queueList.set(queueName, queue);
 
@@ -109,6 +124,12 @@ class RedisQueueService implements IQueue<RedisQueueService> {
     return this.queueList.get(queueName).add(jobCategory, jobData);
   }
 
+  /**
+   * @description Purges a queue
+   * @param {string} queueName
+   * @param {number} gracePeriod
+   * @memberof RedisQueueService
+   */
   public purge(queueName: string, gracePeriod: number): void {
     this.queueList.get(queueName).clean(gracePeriod);
   }

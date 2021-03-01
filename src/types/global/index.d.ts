@@ -10,4 +10,9 @@ declare global {
   type MessageHandler = (message: KafkaMessage) => void;
   type StreamProvider = KafkaStreamProvider; // add more stream providers here
   type StreamConnectOpts = IKafkaConnectOpts;
+
+  type SubscribeHandler = (message: unknown) => void;
+
+  type EventTypeMap = Map<symbol, SubscribeHandler>;
+  type EventSubscriberMap = Map<string, EventTypeMap>;
 }

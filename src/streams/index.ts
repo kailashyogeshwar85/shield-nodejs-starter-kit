@@ -3,6 +3,10 @@ import LoggerFactory from '../factory/services/logger.factory';
 import { IStreamOptions } from '../interfaces/IStream';
 import KafkaStreamProvider from './providers/kafka.stream';
 
+/**
+ * @description Stream Class create Pubsub Provider
+ * @class Stream
+ */
 class Stream {
   private streamOptions: IStreamOptions;
 
@@ -10,6 +14,12 @@ class Stream {
 
   private loggerService: LoggerFactory;
 
+  /**
+   * Creates an instance of Stream.
+   * @param {IStreamOptions} options
+   * @param {LoggerFactory} loggerService
+   * @memberof Stream
+   */
   constructor(options: IStreamOptions, loggerService: LoggerFactory) {
     this.streamOptions = options;
     this.loggerService = loggerService;
@@ -17,6 +27,11 @@ class Stream {
   }
 
   /* eslint-disable no-undef */
+  /**
+   * @description
+   * @return {*}  {StreamProvider}
+   * @memberof Stream
+   */
   init(): StreamProvider {
     let provider: StreamProvider;
     const opts: IStreamOptions = this.streamOptions;

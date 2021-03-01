@@ -4,6 +4,12 @@ import Config from '../config';
 import RedisQueueService from './plugins/redis';
 import LoggerFactory from '../factory/services/logger.factory';
 
+/**
+ * @description Configures the Queue Adapter eg: Redis, SQS
+ * @param {IExpressApp} dependency
+ * @param {LoggerFactory} loggerService
+ * @return {*}  {IQueue<RedisQueueService>}
+ */
 const Queue = (
   dependency: IExpressApp,
   loggerService: LoggerFactory,

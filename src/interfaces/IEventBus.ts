@@ -1,11 +1,11 @@
+/* eslint-disable no-undef */
 export interface IEvent {
   type: string;
   payload: unknown;
 }
 
-type subscribeHandler = (message: unknown) => void;
-
 export interface IEventBus {
+  subscribers: EventSubscriberMap;
   publish(event: IEvent): void;
-  subscribe(event: string, handler: subscribeHandler): void;
+  subscribe(event: string, handler: SubscribeHandler): void;
 }

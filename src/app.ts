@@ -39,7 +39,7 @@ export default class ShieldApplication implements IShieldApplication {
     this.server = this.app.listen(this.port || Config.PORT, () => {
       // log server started listening on port this.port | 3210
       this.logger.info(
-        `Server listening on PORT: ${Config.PORT} Environment: ${Config.ENVIRONMENT}`,
+        `Server listening on PORT: ${Config.PORT} Environment: ${Config.ENVIRONMENT}`
       );
       this.app.emit('listening');
     });

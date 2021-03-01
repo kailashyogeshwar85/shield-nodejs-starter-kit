@@ -17,7 +17,9 @@ rules:
   prettier/prettier:
     - error
     -
-      trailingComma: all
+      quoteProps: 'consistent'
+      doubleQuote: true
+      trailingComma: 'all'
       bracketSpacing: true
 
   ### Different from airbnb config
