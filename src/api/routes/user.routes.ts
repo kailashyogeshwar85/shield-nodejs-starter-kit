@@ -1,10 +1,9 @@
-import { AwilixContainer } from 'awilix';
-import { Application, Router, Request, Response } from 'express';
+import { Router, Request, Response } from 'express';
+import IRouterDependencies from '../../interfaces/IRouterDepdencies.interface';
 import LoggerFactory from '../../factory/services/logger.service.factory';
-import DIHelper from '../../utils/di.utils';
+import UserController from '../controllers/user.controller';
 
-const UserRouter = (app: Application): void => {
-  const container: AwilixContainer = DIHelper.getContainer();
+const UserRouter = ({ app, container }: IRouterDependencies): void => {
   const logger = container
     .resolve<LoggerFactory>('logger')
     .createLogger('router');
@@ -40,7 +39,7 @@ const UserRouter = (app: Application): void => {
    *
    */
   router.get('/users', (req: Request, res: Response) => {
-    res.send('USER ENDPOINT');
+    container.resolve<UserController>('userController').getUsers(req, res);
   });
 };
 

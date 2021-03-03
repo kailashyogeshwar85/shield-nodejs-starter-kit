@@ -1,7 +1,6 @@
 import ShieldApplication from './app';
 import IShieldApplication from './interfaces/IShieldApplication.interface';
 import LoggerFactory from './loaders/logger.loader';
-
 /**
  * @description Boot your Express App and return the Http Server instance
  * @param {number} [port] Optional port for parallel testing

@@ -4,8 +4,10 @@ export interface IEvent {
   payload: unknown;
 }
 
+export interface ISubscribtionReturnType {
+  unsubscribe: () => void;
+}
 export interface IEventBus {
-  subscribers: EventSubscriberMap;
   publish(event: IEvent): void;
-  subscribe(event: string, handler: SubscribeHandler): void;
+  subscribe(event: string, handler: SubscribeHandler): ISubscribtionReturnType;
 }

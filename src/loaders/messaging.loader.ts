@@ -17,6 +17,7 @@ const messagingFactory = async (): Promise<void> => {
 
   logger.info('Configuring stream provider');
 
+  // FIXME: change stream to messaging
   const options: IMessagingOptions = {
     type: Config.STREAM_ADAPTER,
     connectOpts: Config.STREAM_CONFIG,

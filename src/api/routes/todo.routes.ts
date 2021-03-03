@@ -1,15 +1,8 @@
-import { AwilixContainer } from 'awilix';
-import { Application, Router, Request, Response } from 'express';
-import LoggerFactory from '../../factory/services/logger.service.factory';
-import DIHelper from '../../utils/di.utils';
+import { Router, Request, Response } from 'express';
+import TodoController from '../controllers/todo.controller';
+import IRouterDependencies from '../../interfaces/IRouterDepdencies.interface';
 
-const TodoRouter = (app: Application): void => {
-  const container: AwilixContainer = DIHelper.getContainer();
-  const logger = container
-    .resolve<LoggerFactory>('logger')
-    .createLogger('router');
-  logger.debug('Configuring todo router');
-
+const TodoRouter = ({ app, container }: IRouterDependencies): void => {
   const router = Router();
   app.use(router);
   /**
@@ -31,7 +24,7 @@ const TodoRouter = (app: Application): void => {
    *
    */
   router.get('/todos', (req: Request, res: Response) => {
-    res.send('TODO LIST');
+    container.resolve<TodoController>('todoController').getTodos(req, res);
   });
 };
 

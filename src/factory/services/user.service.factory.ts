@@ -1,9 +1,20 @@
 import { asClass, AwilixContainer } from 'awilix';
+import LoggerFactory from './logger.service.factory';
+import { IServiceDeps } from '../../interfaces/IServiceDependencies.interface';
 import UserService from '../../api/services/user.service';
 
 export default (container: AwilixContainer): void => {
-  // TODO: define dependencies here
+  const dependencies: IServiceDeps = {
+    container,
+    logger: container
+      .resolve<LoggerFactory>('logger')
+      .createLogger('userService'),
+    utils: container.resolve('utilityService'),
+    models: {},
+  };
   container.register({
-    userService: asClass(UserService).singleton(),
+    userService: asClass(UserService)
+      .singleton()
+      .inject(() => dependencies),
   });
 };

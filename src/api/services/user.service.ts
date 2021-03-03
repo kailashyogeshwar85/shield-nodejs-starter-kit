@@ -1,10 +1,27 @@
+import { Logger } from '@zebpay/colt';
+import { IServiceDeps } from '../../interfaces/IServiceDependencies.interface';
+
 /**
- * @description User Service to perform business logic on user objects
+ * @description Todo Service
  * @export
  * @class UserService
  */
 export default class UserService {
-  // constructor() {}
+  private logger: Logger;
 
-  async getAllUsers(): Promise<any> {}
+  /**
+   * Creates an instance of UserService.
+   * @param {IServiceDeps} { logger }
+   * @memberof UserService
+   */
+  constructor(deps: IServiceDeps) {
+    this.logger = deps.logger;
+  }
+
+  async getAllUsers(): Promise<any> {
+    this.logger.info('getting todos');
+    const result = await Promise.resolve([{ id: 1, title: 'todo1' }]);
+
+    return result;
+  }
 }

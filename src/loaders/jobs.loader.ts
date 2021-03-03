@@ -5,7 +5,7 @@ import UserRegisterEmailJob from '../jobs/userRegisterEmail.job';
 import DIHelper from '../utils/di.utils';
 
 // eslint-disable-next-line no-undef
-const JobFactory = async (queue: IQueue<QueueService>): Promise<void> => {
+const JobLoader = async (queue: IQueue<QueueService>): Promise<void> => {
   const container: AwilixContainer = DIHelper.getContainer();
   const loggerService = container.resolve<LoggerFactory>('logger');
   const logger = loggerService.createLogger('jobfactory');
@@ -24,4 +24,4 @@ const JobFactory = async (queue: IQueue<QueueService>): Promise<void> => {
   }
 };
 
-export default JobFactory;
+export default JobLoader;

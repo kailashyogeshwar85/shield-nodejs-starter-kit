@@ -1,4 +1,8 @@
-import { IEventBus } from '../interfaces/IEventBus.interface';
+import {
+  IEvent,
+  IEventBus,
+  ISubscribtionReturnType,
+} from '../interfaces/IEventBus.interface';
 
 /**
  * @description EventBus will allow to publish/subscribe events at the application level.
@@ -6,7 +10,9 @@ import { IEventBus } from '../interfaces/IEventBus.interface';
  */
 class EventBus implements IEventBus {
   // eslint-disable-next-line no-undef
-  public subscribers: EventSubscriberMap;
+  private readonly subscribers: EventSubscriberMap;
+
+  private lastCallbackId: number;
 
   /**
    * Creates an instance of EventBus.
@@ -14,11 +20,18 @@ class EventBus implements IEventBus {
    * @memberof EventBus
    */
   constructor() {
-    this.subscribers = new Map();
+    this.lastCallbackId = 0;
+    this.subscribers = {};
   }
 
-  // TODO:
-  publish(msg: unknown): void {}
+  publish(event: IEvent): void {
+    if (!this.subscribers[event.type]) {
+      return;
+    }
+    Object.keys(this.subscribers[event.type]).forEach((callbackId: string) => {
+      this.subscribers[event.type][callbackId](event.payload);
+    });
+  }
 
   /**
    * @description Registers a Handler for EventType 1:1 support.
@@ -26,14 +39,32 @@ class EventBus implements IEventBus {
    * @param {SubscribeHandler} handler
    * @memberof EventBus
    */
-  // eslint-disable-next-line no-undef
-  subscribe(eventType: string, handler: SubscribeHandler): void {
-    if (!this.subscribers.has(eventType)) {
-      this.subscribers.set(
-        eventType,
-        new Map().set(Symbol(eventType), handler),
-      );
+  subscribe(
+    eventType: string,
+    // eslint-disable-next-line no-undef
+    handler: SubscribeHandler,
+  ): ISubscribtionReturnType {
+    const callbackId = this.getCallbackId();
+    if (!this.subscribers[eventType]) {
+      // eslint-disable-next-line no-undef
+      this.subscribers[eventType] = {};
     }
+    this.subscribers[eventType][callbackId] = handler;
+
+    return {
+      unsubscribe: () => {
+        delete this.subscribers[eventType][callbackId];
+        if (!Object.keys(this.subscribers[eventType]).length) {
+          delete this.subscribers[eventType];
+        }
+      },
+    };
+  }
+
+  getCallbackId(): number {
+    this.lastCallbackId += 1;
+
+    return this.lastCallbackId;
   }
 }
 

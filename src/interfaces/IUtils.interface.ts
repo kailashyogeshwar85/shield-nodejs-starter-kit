@@ -1,19 +1,13 @@
 import Lodash from 'lodash';
-import { Response } from 'express';
+import axios from 'axios';
+import ResponseUtility from '../utils/response.utils';
+import DIUtility from '../utils/di.utils';
 
 export interface IUtils {
-  sendFailureResponse: (
-    res: Response,
-    status: number,
-    message: string,
-    code: any,
-    data: any,
-  ) => void;
-  sendSuccessResponse: (
-    res: Response,
-    status: number,
-    message: string,
-    data: any,
-  ) => void;
-  lodash: typeof Lodash;
+  _: typeof Lodash;
+  axios: typeof axios;
+  getFileName: () => string;
+  tryParse: () => JSON | string;
+  responseUtility: typeof ResponseUtility;
+  diUtility: typeof DIUtility;
 }

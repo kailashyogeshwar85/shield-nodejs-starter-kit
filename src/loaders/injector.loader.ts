@@ -1,21 +1,28 @@
-import IExpressApp from '../interfaces/IExpressApp.interface';
-import DIHelper from '../utils/di.utils';
+import { AwilixContainer } from 'awilix';
 import LoggerFactory from '../factory/services/logger.service.factory';
-import AppRouter from '../api/routes';
+import ControllerFactor from '../factory/controllers';
+import ServiceFactory from '../factory/services';
+import UtilityFactory from './utility.loader';
 
 /**
  * @description Injects dependencies to service layer.
  * @param {IShieldApplication} app
  * @param {Logger} logger
  */
-const Injector = ({ app }: IExpressApp): void => {
-  const container = DIHelper.getContainer();
+const Injector = (container: AwilixContainer): void => {
   const logger = container
     .resolve<LoggerFactory>('logger')
     .createLogger('injector');
 
   logger.info('injecting dependencies');
-  AppRouter({ app });
+
+  UtilityFactory(container);
+
+  // First Service
+  ServiceFactory(container);
+
+  // controller as it depends on services
+  ControllerFactor(container);
 };
 
 export default Injector;

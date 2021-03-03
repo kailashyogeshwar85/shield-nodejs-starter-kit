@@ -1,13 +1,20 @@
-import TodoService from 'api/services/todo.service';
 import { asClass, AwilixContainer } from 'awilix';
-import IControllerDeps from 'interfaces/IControllerDependencies.interface';
+import TodoService from '../../api/services/todo.service';
+import IControllerDeps from '../../interfaces/IControllerDependencies.interface';
 import TodoController from '../../api/controllers/todo.controller';
-import { LoggerServiceFactory as Logger } from '../services';
+import LoggerFactory from '../services/logger.service.factory';
 
 export default (container: AwilixContainer): void => {
-  const baseDependencies: IControllerDeps<TodoService> = {
-    utils: container.resolve('utilService'),
-    logger: ,
+  const dependencies: IControllerDeps<TodoService> = {
+    utils: container.resolve('utilityService'),
+    logger: container.resolve<LoggerFactory>('logger').createLogger('todoctrl'),
     service: container.resolve<TodoService>('todoService'),
   };
+
+  // register controller with container
+  container.register({
+    todoController: asClass(TodoController)
+      .singleton()
+      .inject(() => dependencies),
+  });
 };

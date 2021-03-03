@@ -23,8 +23,36 @@ export default class ResponseUtility {
     });
   }
 
-  static sendErrorResponse(
+  /**
+   * @description Sends fail response due to data invalidation
+   * @static
+   * @param {number} [status=400]
+   * @param {IResponseError} error
+   * @param {Response} res
+   * @memberof ResponseUtility
+   */
+  static sendFailedResponse(
     status = 400,
+    error: IResponseError,
+    res: Response,
+  ): void {
+    res.status(status).json({
+      status: 'fail',
+      data: null,
+      error,
+    });
+  }
+
+  /**
+   * @description Send error response incase of exception.
+   * @static
+   * @param {number} [status=500]
+   * @param {IResponseError} error
+   * @param {Response} res
+   * @memberof ResponseUtility
+   */
+  static sendErrorResponse(
+    status = 500,
     error: IResponseError,
     res: Response,
   ): void {
