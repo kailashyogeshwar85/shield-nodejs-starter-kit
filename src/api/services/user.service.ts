@@ -1,4 +1,5 @@
 import { Logger } from '@zebpay/colt';
+import { IServiceResult } from '../../interfaces/IResponse.interface';
 import { IServiceDeps } from '../../interfaces/IServiceDependencies.interface';
 
 /**
@@ -18,9 +19,17 @@ export default class UserService {
     this.logger = deps.logger;
   }
 
-  async getAllUsers(): Promise<any> {
-    this.logger.info('getting todos');
-    const result = await Promise.resolve([{ id: 1, title: 'todo1' }]);
+  async getAllUsers(): Promise<IServiceResult> {
+    this.logger.info('getting all users');
+    const result = await Promise.resolve({
+      users: [
+        {
+          id: 1,
+          name: 'kailash',
+          email: 'kailashyogeshwar85@gmail.com',
+        },
+      ],
+    });
 
     return result;
   }

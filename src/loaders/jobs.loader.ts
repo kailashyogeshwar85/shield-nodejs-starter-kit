@@ -2,11 +2,18 @@ import { asClass, AwilixContainer } from 'awilix';
 import LoggerFactory from '../factory/services/logger.service.factory';
 import IQueue from '../interfaces/IQueue.interface';
 import UserRegisterEmailJob from '../jobs/userRegisterEmail.job';
-import DIHelper from '../utils/di.utils';
 
-// eslint-disable-next-line no-undef
-const JobLoader = async (queue: IQueue<QueueService>): Promise<void> => {
-  const container: AwilixContainer = DIHelper.getContainer();
+/**
+ * @description Configures DeliveryJobs
+ * @param {IQueue<QueueService>} queue
+ * @param {AwilixContainer} container
+ * @return {*}  {Promise<void>}
+ */
+const JobLoader = async (
+  // eslint-disable-next-line no-undef
+  queue: IQueue<QueueService>,
+  container: AwilixContainer,
+): Promise<void> => {
   const loggerService = container.resolve<LoggerFactory>('logger');
   const logger = loggerService.createLogger('jobfactory');
   try {
@@ -14,6 +21,7 @@ const JobLoader = async (queue: IQueue<QueueService>): Promise<void> => {
     container.register({
       userRegisterEmailJob: asClass(UserRegisterEmailJob)
         .inject(() => ({ queue, loggerService }))
+        // pass dependency as a separate argument
         .classic()
         .singleton(),
     });

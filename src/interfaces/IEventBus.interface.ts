@@ -8,6 +8,6 @@ export interface ISubscribtionReturnType {
   unsubscribe: () => void;
 }
 export interface IEventBus {
-  publish(event: IEvent): void;
+  dispatch(event: IEvent): void;
   subscribe(event: string, handler: SubscribeHandler): ISubscribtionReturnType;
 }

@@ -1,30 +1,22 @@
-import { asValue } from 'awilix';
-import LoggerFactory from '../factory/services/logger.service.factory';
+import { asValue, AwilixContainer } from 'awilix';
 import { IMessagingOptions } from '../interfaces/IMessaging.interface';
-import Stream from '../messaging';
+import Messaging from '../messaging';
 import Config from '../constants/config.constant';
-import DIHelper from '../utils/di.utils';
-
 /**
- * @description Exports Stream Provider
+ * @description Exports Messaging Provider
  */
-const messagingFactory = async (): Promise<void> => {
-  const container = DIHelper.getContainer();
-
-  const loggerService = container.resolve<LoggerFactory>('logger');
-
-  const logger = loggerService.createLogger('stream');
-
-  logger.info('Configuring stream provider');
-
-  // FIXME: change stream to messaging
-  const options: IMessagingOptions = {
-    type: Config.STREAM_ADAPTER,
-    connectOpts: Config.STREAM_CONFIG,
+const messagingFactory = async (container: AwilixContainer): Promise<void> => {
+  const messagingOptions: IMessagingOptions = {
+    type: Config.MESSAGING_ADAPTER,
+    connectOpts: Config.MESSAGING_CONFIG,
   };
 
-  const messagingProvider = new Stream(options, loggerService).init();
-  await messagingProvider.createClient('some_group_id');
+  const messagingProvider = new Messaging(
+    messagingOptions,
+    container.resolve('logger'),
+  ).init();
+
+  await messagingProvider.createClient(Config.MESSAGING_CONSUMER_GROUP);
 
   container.register({
     messagingProvider: asValue(messagingProvider),

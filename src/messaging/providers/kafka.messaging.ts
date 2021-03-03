@@ -16,7 +16,7 @@ import {
   IMessagingProvider,
 } from '../../interfaces/IMessaging.interface';
 
-class KafkaStreamProvider implements IMessagingProvider {
+class KafkaMessagingProvider implements IMessagingProvider {
   private clientOpts: KafkaConfig;
 
   private client: Kafka;
@@ -117,4 +117,4 @@ class KafkaStreamProvider implements IMessagingProvider {
   }
 }
 
-export default KafkaStreamProvider;
+export default KafkaMessagingProvider;

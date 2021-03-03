@@ -5,3 +5,7 @@ export interface IResponse {
   data: unknown;
   error: IResponseError;
 }
+
+export interface IServiceResult {
+  [Key: string]: unknown;
+}

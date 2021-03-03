@@ -18,7 +18,7 @@ export default class Config {
 
   static QUEUE_ADAPTER = process.env.QUEUE_ADAPTER || 'redis';
 
-  static STREAM_ADAPTER = process.env.STREAM_ADAPTER || 'kafka';
+  static MESSAGING_ADAPTER = process.env.MESSAGING_ADAPTER || 'kafka';
 
   static readonly LOG_OPTIONS = {
     logPath: process.env.LOG_PATH || 'logs',
@@ -40,7 +40,9 @@ export default class Config {
     password: process.env.REDIS_PASSWORD,
   };
 
-  static readonly STREAM_CONFIG = {
+  static readonly MESSAGING_CONSUMER_GROUP = 'consumer_group';
+
+  static readonly MESSAGING_CONFIG = {
     brokers: process.env.KAFKA_BROKERS,
     ssl: true,
     sasl: {

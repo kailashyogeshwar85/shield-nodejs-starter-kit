@@ -11,6 +11,7 @@ export default (container: AwilixContainer): void => {
       .createLogger('userService'),
     utils: container.resolve('utilityService'),
     models: {},
+    eventBus: container.resolve('eventBus'),
   };
   container.register({
     userService: asClass(UserService)

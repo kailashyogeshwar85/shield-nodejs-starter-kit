@@ -7,6 +7,7 @@ env:
 parserOptions:
   ecmaVersion: 2015 #Allowing for the modern ECMAScript Feature
   sourceType: module #Allows for the use of imports
+  project: "./tsconfig.json"
 extends:
   - "plugin:@typescript-eslint/recommended"
   - "prettier/@typescript-eslint" # Uses eslint-config-prettier to disable ESLint rules from @typescript-eslint/eslint-plugin that would conflict with prettier
@@ -14,6 +15,7 @@ extends:
   - "plugin:import/typescript"
   - "plugin:prettier/recommended" #Enables eslint-plugin-prettier and eslint-config-prettier
 rules:
+  no-shadow: "off"
   prettier/prettier:
     - error
     -

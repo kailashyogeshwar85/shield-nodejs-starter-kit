@@ -14,6 +14,7 @@ export default (container: AwilixContainer): void => {
       // pass in the sequelizeModels
       userModel: {},
     },
+    eventBus: container.resolve('eventBus'),
   };
   container.register({
     todoService: asClass(TodoService)

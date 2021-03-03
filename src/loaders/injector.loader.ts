@@ -1,8 +1,9 @@
 import { AwilixContainer } from 'awilix';
 import LoggerFactory from '../factory/services/logger.service.factory';
-import ControllerFactor from '../factory/controllers';
+import ControllerFactory from '../factory/controllers';
 import ServiceFactory from '../factory/services';
 import UtilityFactory from './utility.loader';
+import EventSubscriberFactory from './event.loader';
 
 /**
  * @description Injects dependencies to service layer.
@@ -18,11 +19,14 @@ const Injector = (container: AwilixContainer): void => {
 
   UtilityFactory(container);
 
-  // First Service
+  // Load EventSubscribe factoryr
+  EventSubscriberFactory(container);
+
+  // Load Services
   ServiceFactory(container);
 
-  // controller as it depends on services
-  ControllerFactor(container);
+  // Load controllers as it depends on services
+  ControllerFactory(container);
 };
 
 export default Injector;

@@ -1,3 +1,5 @@
+import { Logger } from '@zebpay/colt';
+import LoggerFactory from '../factory/services/logger.service.factory';
 import {
   IEvent,
   IEventBus,
@@ -10,21 +12,25 @@ import {
  */
 class EventBus implements IEventBus {
   // eslint-disable-next-line no-undef
-  private readonly subscribers: EventSubscriberMap;
+  private subscribers: EventSubscriberMap;
 
   private lastCallbackId: number;
+
+  private logger: Logger;
 
   /**
    * Creates an instance of EventBus.
    * @param {string} name
    * @memberof EventBus
    */
-  constructor() {
+  constructor(logger: LoggerFactory) {
+    this.logger = logger.createLogger('evtbus');
     this.lastCallbackId = 0;
     this.subscribers = {};
   }
 
-  publish(event: IEvent): void {
+  dispatch(event: IEvent): void {
+    this.logger.debug(`Dispatching event ${event.type}`);
     if (!this.subscribers[event.type]) {
       return;
     }
@@ -45,6 +51,9 @@ class EventBus implements IEventBus {
     handler: SubscribeHandler,
   ): ISubscribtionReturnType {
     const callbackId = this.getCallbackId();
+    this.logger.info(`Subscribing listener for type -> ${eventType}`, {
+      callbackId,
+    });
     if (!this.subscribers[eventType]) {
       // eslint-disable-next-line no-undef
       this.subscribers[eventType] = {};

@@ -1,7 +1,7 @@
 import { AwilixContainer } from 'awilix';
 import { Router } from 'express';
 import UserRouter from './user.routes';
-import TodoRouter from './todo.routes';
+// import TodoRouter from './todo.routes';
 /**
  * @description Configures Routes
  * @param {IExpressApp} { app }
@@ -12,7 +12,7 @@ const AppRouter = (container: AwilixContainer): Router => {
    * Application route will be initialized here
    */
   UserRouter({ app, container });
-  TodoRouter({ app, container });
+  // TodoRouter({ app, container });
 
   return app;
 };

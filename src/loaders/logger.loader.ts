@@ -4,6 +4,11 @@ import Config from '../constants/config.constant';
 import LoggerFactory from '../factory/services/logger.service.factory';
 import DIHelper from '../utils/di.utils';
 
+/**
+ * @description Configures a logger should be called once from server's entrypoint.
+ * @param {string} scope
+ * @return {*}  {Logger}
+ */
 const getLogger = (scope: string): Logger => {
   const container: AwilixContainer = DIHelper.getContainer();
   const loggingOptions: ILogOptions = Config.LOG_OPTIONS;
