@@ -1,4 +1,4 @@
-import { Logger } from '@zebpay/colt';
+import { Log4Microservice as Logger } from 'log4-microservice';
 import { Request, Response } from 'express';
 import { IUtils } from '../../interfaces/IUtils.interface';
 import IControllerDeps from '../../interfaces/IControllerDependencies.interface';

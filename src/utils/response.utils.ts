@@ -4,6 +4,8 @@
  */
 
 import { Response } from 'express';
+import IApiError from 'interfaces/IApiError.interface';
+import ApiError from '../api/exceptions/apiError.exception';
 import { IResponseError } from '../interfaces/IResponseError.interface';
 
 export default class ResponseUtility {
@@ -61,5 +63,27 @@ export default class ResponseUtility {
       data: null,
       error,
     });
+  }
+
+  /**
+   * @description HandlesResponse consumed by controllers to be resuable.
+   * @static
+   * @param {ApiError} error
+   * @param {Response} res
+   * @memberof ResponseUtility
+   */
+  static handleServiceFailedResponse(error: ApiError, res: Response): void {
+    const apiError: IResponseError = {
+      error: {
+        code: error.errorCode,
+        message: error.message,
+        errors: error.errors,
+      },
+    };
+    if (error.isOperational) {
+      ResponseUtility.sendFailedResponse(error.statusCode, apiError, res);
+    } else {
+      ResponseUtility.sendErrorResponse(error.statusCode, apiError, res);
+    }
   }
 }

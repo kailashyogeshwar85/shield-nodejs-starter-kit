@@ -1,4 +1,4 @@
-import { Logger } from '@zebpay/colt';
+import { Log4Microservice as Logger } from 'log4-microservice';
 import { IServiceResult } from '../../interfaces/IResponse.interface';
 import { IServiceDeps } from '../../interfaces/IServiceDependencies.interface';
 
@@ -19,8 +19,13 @@ export default class UserService {
     this.logger = deps.logger;
   }
 
-  async getAllUsers(): Promise<IServiceResult> {
-    this.logger.info('getting all users');
+  /**
+   * @description Get All users
+   * @return {*}  {Promise<IServiceResult>}
+   * @memberof UserService
+   */
+  async getUser(): Promise<IServiceResult> {
+    this.logger.info('getting a user');
     const result = await Promise.resolve({
       users: [
         {
@@ -29,6 +34,22 @@ export default class UserService {
           email: 'kailashyogeshwar85@gmail.com',
         },
       ],
+    });
+
+    return result;
+  }
+
+  /**
+   * @description creates user
+   * @param {unknown} userData
+   * @return {*}  {Promise<IServiceResult>}
+   * @memberof UserService
+   */
+  async createUser(userData: unknown): Promise<IServiceResult> {
+    this.logger.info('creating user');
+
+    const result = await Promise.resolve({
+      user: userData,
     });
 
     return result;

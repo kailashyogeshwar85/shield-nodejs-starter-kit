@@ -1,4 +1,5 @@
 import dotenv from 'dotenv';
+import { SequelizeOptions } from 'sequelize-typescript';
 
 dotenv.config();
 
@@ -26,11 +27,11 @@ export default class Config {
     level: process.env.LOG_LEVEL || 'debug',
   };
 
-  static readonly DATABASE = {
+  static readonly DATABASE: SequelizeOptions = {
     database: process.env.DATABASE || 'database_missing',
     username: process.env.DB_USERNAME || 'postgres',
     password: process.env.DB_PASSWORD || 'postgres',
-    dialect: process.env.DIALECT || 'postgres',
+    dialect: 'postgres',
   };
 
   static readonly REDIS_CONFIG = {

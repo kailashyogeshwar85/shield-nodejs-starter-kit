@@ -8,6 +8,6 @@ export interface IResponseError {
   error: {
     code: string;
     message: string;
-    errors: IValidationError[];
+    errors: any;
   };
 }

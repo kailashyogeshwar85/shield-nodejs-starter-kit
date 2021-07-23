@@ -1,4 +1,4 @@
-import { Logger } from '@zebpay/colt';
+import { Log4Microservice as Logger } from 'log4-microservice';
 
 /**
  * @description Creates a logger instance for module.

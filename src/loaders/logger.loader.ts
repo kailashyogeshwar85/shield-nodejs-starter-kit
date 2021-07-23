@@ -1,6 +1,6 @@
-import { ILogOptions, Logger } from '@zebpay/colt';
+import { ILogOptions, Log4Microservice as Logger } from 'log4-microservice';
 import { AwilixContainer, asClass } from 'awilix';
-import Config from '../constants/config.constant';
+import Config from '../constants/config.constants';
 import LoggerFactory from '../factory/services/logger.service.factory';
 import DIHelper from '../utils/di.utils';
 

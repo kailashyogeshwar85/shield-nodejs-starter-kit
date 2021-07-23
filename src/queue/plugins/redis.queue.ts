@@ -4,8 +4,8 @@
 
 import { Application } from 'express';
 import Queue, { Queue as BullQueue } from 'bull';
-import { Logger } from '@zebpay/colt';
-import Config from '../../constants/config.constant';
+import { Log4Microservice as Logger } from 'log4-microservice';
+import Config from '../../constants/config.constants';
 import IExpressApp from '../../interfaces/IExpressApp.interface';
 import IQueue from '../../interfaces/IQueue.interface';
 import LoggerFactory from '../../factory/services/logger.service.factory';

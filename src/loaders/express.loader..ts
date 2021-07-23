@@ -1,5 +1,6 @@
 import bodyParser from 'body-parser';
 import appRouter from '../api/routes';
+import globalErrorHandlerMiddleware from '../api/middlewares/globalErrorHandler.middleware';
 
 // eslint-disable-next-line no-undef
 const ExpressAppLoader = ({ app, container }: LoaderDependencies): void => {
@@ -19,7 +20,7 @@ const ExpressAppLoader = ({ app, container }: LoaderDependencies): void => {
 
   // Configure routes
   app.use(appRouter(container));
-  // app.use(errorhandlerMiddleware); // global error handler
+  app.use(globalErrorHandlerMiddleware); // global error handler
 };
 
 export default ExpressAppLoader;

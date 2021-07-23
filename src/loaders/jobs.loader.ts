@@ -1,3 +1,4 @@
+/* global QueueService */
 import { asClass, AwilixContainer } from 'awilix';
 import LoggerFactory from '../factory/services/logger.service.factory';
 import IQueue from '../interfaces/IQueue.interface';
@@ -10,7 +11,6 @@ import UserRegisterEmailJob from '../jobs/userRegisterEmail.job';
  * @return {*}  {Promise<void>}
  */
 const JobLoader = async (
-  // eslint-disable-next-line no-undef
   queue: IQueue<QueueService>,
   container: AwilixContainer,
 ): Promise<void> => {

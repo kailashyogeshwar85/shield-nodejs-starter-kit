@@ -1,4 +1,4 @@
-import { Logger } from '@zebpay/colt';
+import { Log4Microservice as Logger } from 'log4-microservice';
 import LoggerFactory from '../factory/services/logger.service.factory';
 import {
   IEvent,

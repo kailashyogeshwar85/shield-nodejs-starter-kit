@@ -1,5 +1,5 @@
 /* eslint-disable no-undef */
-import { Logger } from '@zebpay/colt';
+import { Logger } from 'log4-microservice';
 import Queue from 'bull';
 import IJobCreator from '../interfaces/IJobCreator.interface';
 import IQueue, { IJobProcessor } from '../interfaces/IQueue.interface';

@@ -3,6 +3,7 @@ import lodash from 'lodash';
 import axios from 'axios';
 import ResponseUtility from './response.utils';
 import DIUtility from './di.utils';
+import ApiError from '../api/exceptions/apiError.exception';
 
 /**
  * @description Utility Class that will be accessible to all the core components

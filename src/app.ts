@@ -1,7 +1,7 @@
-import { Logger } from '@zebpay/colt';
+import { Log4Microservice as Logger } from 'log4-microservice';
 import express, { Application } from 'express';
 import { Server } from 'http';
-import Config from './constants/config.constant';
+import Config from './constants/config.constants';
 import IShieldApplication from './interfaces/IShieldApplication.interface';
 import LoggerFactory from './loaders/logger.loader';
 import AppLoader from './loaders';

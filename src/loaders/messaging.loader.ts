@@ -1,7 +1,7 @@
 import { asValue, AwilixContainer } from 'awilix';
 import { IMessagingOptions } from '../interfaces/IMessaging.interface';
 import Messaging from '../messaging';
-import Config from '../constants/config.constant';
+import Config from '../constants/config.constants';
 /**
  * @description Exports Messaging Provider
  */

@@ -1,6 +1,6 @@
 import { AwilixContainer } from 'awilix';
-import { Logger } from '@zebpay/colt';
-import EventEnum from '../events';
+import { Log4Microservice as Logger } from 'log4-microservice';
+import EventEnum from '../constants/events.constants';
 import { IEventBus, IEvent } from '../../interfaces/IEventBus.interface';
 import LoggerFactory from '../../factory/services/logger.service.factory';
 

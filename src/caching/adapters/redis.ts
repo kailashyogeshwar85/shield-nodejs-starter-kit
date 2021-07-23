@@ -1,10 +1,12 @@
 import { createClient, RedisClient } from 'redis';
 import { promisify } from 'util';
+import { ICacheOptions } from '../../interfaces/ICache.interface';
 
-interface ICacheOptions {
-  db: number;
-}
-
+/**
+ * @description RedisCacheService
+ * @export
+ * @class RedisCachingService
+ */
 export default class RedisCachingService {
   private client: RedisClient;
 
@@ -17,7 +19,7 @@ export default class RedisCachingService {
    */
   constructor(cacheOptions: ICacheOptions) {
     this.cacheOptions = cacheOptions;
-    this.client = createClient(cacheOptions);
+    this.client = createClient(this.cacheOptions);
   }
 
   /**

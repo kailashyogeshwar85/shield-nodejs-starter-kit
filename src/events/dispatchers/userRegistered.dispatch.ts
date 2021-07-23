@@ -1,5 +1,5 @@
 import { IEvent } from '../../interfaces/IEventBus.interface';
-import EventEnum from '../events';
+import EventEnum from '../constants/events.constants';
 
 /**
  * @description Dispatches user registration event.
