@@ -48,9 +48,6 @@ export default class ProductDiscount
   })
   active: boolean;
 
-  @ForeignKey(() => Product)
-  categoryId: number;
-
   @Column({
     type: DataType.DATE,
     field: 'created_at',

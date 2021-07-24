@@ -29,9 +29,6 @@ export default class ProductInventory
   })
   quantity: number;
 
-  @ForeignKey(() => Product)
-  inventoryId: number;
-
   @Column({
     type: DataType.DATE,
     field: 'created_at',
