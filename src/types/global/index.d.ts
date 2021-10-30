@@ -60,4 +60,9 @@ declare global {
   type Constructor<T> = new () => T;
 
   type Models<T> = Constructor<T> & NonAbstract<typeof Model>;
+
+  type KycVendors = 'kyckart' | 'decentro';
+  type VerificationStatus = 'PENDING' | 'SUCCESS' | 'FAILURE';
+  type KycResult = PanKycResult & DLKycResult & VoterIdKycResult & AadhaarKycResult;
+  type OcrResult = PanOcrResult & DLOcrResult & VoterIdOcrResult & AadhaarOcrResult;
 }

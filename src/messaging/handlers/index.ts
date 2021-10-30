@@ -24,6 +24,6 @@ export default class MessageHandler {
    * @memberof EventHandler
    */
   async configureEventHandlers(): Promise<void> {
-    await OrderPlacedMessageHandler.init(this.messageProvider);
+    new OrderPlacedMessageHandler().init(this.messageProvider);
   }
 }
