@@ -1,6 +1,7 @@
 import { AwilixContainer } from 'awilix';
 import { Router } from 'express';
 import UserRouter from './user.routes';
+import HealthRouter from './health.routes';
 // import TodoRouter from './todo.routes';
 /**
  * @description Configures Routes
@@ -13,6 +14,7 @@ const AppRouter = (container: AwilixContainer): Router => {
    */
   UserRouter({ app, container });
   // TodoRouter({ app, container });
+  HealthRouter({ app, container });
 
   return app;
 };

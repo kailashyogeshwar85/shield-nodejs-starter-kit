@@ -45,11 +45,11 @@ export default class Config {
 
   static readonly MESSAGING_CONFIG = {
     brokers: process.env.KAFKA_BROKERS,
-    ssl: true,
-    sasl: {
-      mechanism: 'scram-sha-256',
-      username: process.env.KAFKA_SASL_USERNAME,
-      password: process.env.KAFKA_SASL_PASSWORD,
-    },
+    // ssl: true,
+    // sasl: {
+    //   mechanism: 'scram-sha-256',
+    //   username: process.env.KAFKA_SASL_USERNAME,
+    //   password: process.env.KAFKA_SASL_PASSWORD,
+    // },
   };
 }

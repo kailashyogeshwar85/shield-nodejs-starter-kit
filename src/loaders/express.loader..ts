@@ -1,6 +1,7 @@
-import bodyParser from 'body-parser';
+import express from 'express';
 import appRouter from '../api/routes';
 import globalErrorHandlerMiddleware from '../api/middlewares/globalErrorHandler.middleware';
+import RequestLogger from '../api/middlewares/reqlogger.middleware';
 
 // eslint-disable-next-line no-undef
 const ExpressAppLoader = ({ app, container }: LoaderDependencies): void => {
@@ -10,10 +11,9 @@ const ExpressAppLoader = ({ app, container }: LoaderDependencies): void => {
   app.disable('x-powered-by');
 
   // app.use(corsMiddleware.validateWhitelistDomains());
-
-  app.use(bodyParser.json());
-  app.use(bodyParser.urlencoded({ extended: true }));
-  // app.use(requestLogger.logRequest());
+  app.use(express.json());
+  app.use(express.urlencoded({ extended: true }));
+  app.use(RequestLogger.logRequest());
 
   // scoped container
   // app.use(scopePerRequest(container));
