@@ -52,7 +52,7 @@ export default class RedisCachingService {
    * @return {*}  {Promise<unknown>}
    * @memberof RedisCachingService
    */
-  hset(hash: string, key: string, value: string): Promise<unknown> {
+  HSET(hash: string, key: string, value: string): Promise<unknown> {
     const hsetAsync = promisify(this.client.hset);
 
     return hsetAsync([hash, key, value]);
@@ -64,9 +64,15 @@ export default class RedisCachingService {
    * @return {*}  {Promise<unknown>}
    * @memberof RedisCachingService
    */
-  hget(hash: string, key: string): Promise<unknown> {
-    const hgetAsync = promisify(this.client.hget);
+  HGET(hash: string, key: string): Promise<unknown> {
+    const hgetAsync = promisify(this.client.HGET);
 
     return hgetAsync(hash, key);
+  }
+
+  HGETALL(hash: string): Promise<unknown> {
+    const hgetAllAsync = promisify(this.client.HGETALL);
+
+    return hgetAllAsync(hash);
   }
 }
