@@ -14,6 +14,9 @@ class Messaging {
 
   private loggerService: LoggerFactory;
 
+  /* eslint-disable no-undef */
+  static provider: MessagingProvider;
+
   /**
    * Creates an instance of Messaging.
    * @param {IMessagingOptions} options
@@ -33,12 +36,19 @@ class Messaging {
    * @memberof Messaging
    */
   init(): MessagingProvider {
-    let provider: MessagingProvider;
     const opts: IMessagingOptions = this.messagingOptions;
     this.logger.debug(`Configuring MessagingProvider => ${opts.type}`);
+
+    if (Messaging.provider) {
+      return Messaging.provider;
+    }
+
     switch (this.messagingOptions.type) {
       case 'kafka':
-        provider = new KafkaMessagingProvider(opts, this.loggerService);
+        Messaging.provider = new KafkaMessagingProvider(
+          opts,
+          this.loggerService,
+        );
         break;
       default:
         throw new Error(
@@ -46,7 +56,7 @@ class Messaging {
         );
     }
 
-    return provider;
+    return Messaging.provider;
   }
 }
 

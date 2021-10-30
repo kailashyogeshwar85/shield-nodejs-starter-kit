@@ -4,7 +4,6 @@
  */
 
 import { Response } from 'express';
-import IApiError from 'interfaces/IApiError.interface';
 import ApiError from '../api/exceptions/apiError.exception';
 import { IResponseError } from '../interfaces/IResponseError.interface';
 

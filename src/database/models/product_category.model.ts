@@ -13,6 +13,7 @@ export default class ProductCategory
     type: DataType.BIGINT,
     primaryKey: true,
     allowNull: false,
+    autoIncrement: true,
     autoIncrementIdentity: true,
   })
   id: number;

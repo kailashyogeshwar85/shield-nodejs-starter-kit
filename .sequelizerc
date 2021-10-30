@@ -1,0 +1,12 @@
+const path = require('path');
+
+const destination = process.env.DESTINATION ? process.env.DESTINATION : 'dist';
+
+module.exports = {
+  env: process.env.NODE_ENV,
+  config: path.resolve('migration.config.js'),
+  'seeders-path': path.resolve(destination, 'database', 'seeders'),
+  'migrations-path': path.resolve(destination, 'database', 'migrations'),
+  'models-path': path.resolve('dist', 'database', 'models'),
+};
+

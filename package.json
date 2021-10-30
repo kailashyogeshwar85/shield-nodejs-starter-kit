@@ -11,7 +11,8 @@
     "lint": "eslint --ignore-path .gitignore --ext .ts src/**/*.ts",
     "test": "echo no test command",
     "watch": "tsc -w",
-    "db:migrate": "nodemon dist/server.js --migrate"
+    "db:migrate": "nodemon dist/server.js --migrate",
+    "db:seed:all": "./node_modules/.bin/sequelize-cli db:seed:all --config ./sequelize.config.js"
   },
   "repository": {
     "type": "git",
@@ -74,6 +75,7 @@
     "nock": "^13.1.1",
     "nodemon": "^2.0.6",
     "prettier": "^2.1.2",
+    "sequelize-cli": "^6.2.0",
     "sequelize-fixtures": "^1.2.0",
     "supertest": "^6.1.4",
     "typescript": "^4.0.5"

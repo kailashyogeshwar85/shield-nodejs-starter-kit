@@ -23,6 +23,7 @@ export default class Product
     type: DataType.BIGINT,
     primaryKey: true,
     allowNull: true,
+    autoIncrement: true,
     autoIncrementIdentity: true,
     field: 'id',
   })
@@ -56,12 +57,25 @@ export default class Product
   price: number;
 
   @ForeignKey(() => ProductCategory)
+  @Column({
+    type: DataType.BIGINT,
+    field: 'category_id',
+  })
   categoryId: number;
 
   @ForeignKey(() => ProductInventory)
+  @Column({
+    type: DataType.BIGINT,
+    field: 'inventory_id',
+  })
   inventoryId: number;
 
   @ForeignKey(() => ProductDiscount)
+  @Column({
+    type: DataType.BIGINT,
+    field: 'discount_id',
+    allowNull: true,
+  })
   discountId?: number;
 
   @BelongsTo(() => ProductCategory)

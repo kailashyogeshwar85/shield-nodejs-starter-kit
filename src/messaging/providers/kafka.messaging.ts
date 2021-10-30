@@ -15,7 +15,12 @@ import {
   IMessagingOptions,
   IMessagingProvider,
 } from '../../interfaces/IMessaging.interface';
+import MessageType from '../../enums/messagetype.enum';
 
+type HandlerMap = {
+  // eslint-disable-next-line no-undef
+  [key in MessageType]: MessageHandler[];
+};
 class KafkaMessagingProvider implements IMessagingProvider {
   private clientOpts: KafkaConfig;
 
@@ -28,7 +33,7 @@ class KafkaMessagingProvider implements IMessagingProvider {
   private logger: Logger;
 
   // eslint-disable-next-line no-undef
-  private messageHandlers: Map<string, MessageHandler>;
+  private messageHandlers: Map<string, HandlerMap>;
 
   constructor(opts: IMessagingOptions, loggerService: LoggerFactory) {
     this.clientOpts = this.getConnectOpts(opts.connectOpts);
@@ -57,28 +62,51 @@ class KafkaMessagingProvider implements IMessagingProvider {
   }
 
   // eslint-disable-next-line no-undef
-  async subscribe(topic: string, handler: MessageHandler): Promise<void> {
+  async subscribe(topic: string): Promise<void> {
     await this.consumer.subscribe({ topic, fromBeginning: false });
-    this.registerHandlers(topic, handler);
   }
 
   async publish(messages: ProducerRecord): Promise<void> {
     await this.producer.send(messages);
   }
 
-  // eslint-disable-next-line no-undef
-  private registerHandlers(topic: string, handler: MessageHandler): void {
-    if (!this.messageHandlers.has(topic)) {
-      this.messageHandlers.set(topic, handler);
+  public registerHandlers(
+    topic: string,
+    eventType: MessageType,
+    // eslint-disable-next-line no-undef
+    handler: MessageHandler,
+  ): void {
+    let isFirstSubscription = false;
+
+    if (!this.messageHandlers[topic]) {
+      isFirstSubscription = true;
+      this.messageHandlers[topic] = {};
+    }
+    if (!this.messageHandlers[topic][eventType]) {
+      this.messageHandlers[topic][eventType] = [];
+    }
+    this.messageHandlers[topic][eventType].push(handler);
+
+    if (isFirstSubscription) {
+      this.subscribe(topic);
     }
   }
 
   private beginProcessingMessage(): void {
     this.consumer.run({
       eachMessage: async ({ topic, message }: EachMessagePayload) => {
+        const eventData = JSON.parse(message.value.toString());
+        const messageType = eventData.eventName as MessageType;
         if (this.messageHandlers.has(topic)) {
-          // eslint-disable-next-line no-undef
-          this.messageHandlers.get(topic)(message);
+          if (this.messageHandlers[topic][messageType]) {
+            this.logger.info('Dispatching message to handler', {
+              eventData,
+              topic,
+            });
+            this.messageHandlers[topic][messageType].forEach(handler =>
+              handler(eventData),
+            );
+          }
         }
       },
     });

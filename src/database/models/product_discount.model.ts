@@ -1,10 +1,4 @@
-import {
-  Column,
-  DataType,
-  Table,
-  Model,
-  ForeignKey,
-} from 'sequelize-typescript';
+import { Column, DataType, Table, Model } from 'sequelize-typescript';
 import { IProductDiscountAttributes } from '../../interfaces/model_interfaces/IProductDiscountAttributes';
 
 @Table({
@@ -19,6 +13,7 @@ export default class ProductDiscount
     type: DataType.BIGINT,
     primaryKey: true,
     allowNull: false,
+    autoIncrement: true,
     autoIncrementIdentity: true,
   })
   id: number;
